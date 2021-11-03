@@ -1,0 +1,32 @@
+name: Deploy
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout twilio-node
+        uses: actions/checkout@v2
+
+      # The expression strips off the shortest match from the front of the string to yield just the tag name as the output
+      - name: Get tagged version
+        run: echo "GITHUB_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+#      - name: Set up Node
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 8
+#          registry-url: 'https://registry.npmsjs.org'
+
+      - run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: 'npm'
+
