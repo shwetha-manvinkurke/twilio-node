@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Bump npm version
-        if: ${{ matrix.go == '10' }}
+        if: ${{ matrix.node == '10' }}
         run: npm i -g npm@7
 
       - run: npm install
