@@ -16,7 +16,7 @@ type BrandRegistrationBrandFeedback = 'TAX_ID'|'STOCK_SYMBOL'|'NONPROFIT'|'GOVER
 
 type BrandRegistrationIdentityStatus = 'SELF_DECLARED'|'UNVERIFIED'|'VERIFIED'|'VETTED_VERIFIED';
 
-type BrandRegistrationStatus = 'PENDING'|'APPROVED'|'FAILED';
+type BrandRegistrationStatus = 'PENDING'|'APPROVED'|'FAILED'|'IN_REVIEW'|'DELETED';
 
 /**
  * Initialize the BrandRegistrationList
@@ -274,6 +274,12 @@ declare class BrandRegistrationContext {
    * Provide a user-friendly representation
    */
   toJSON(): any;
+  /**
+   * update a BrandRegistrationInstance
+   *
+   * @param callback - Callback to handle processed record
+   */
+  update(callback?: (error: Error | null, items: BrandRegistrationInstance) => any): Promise<BrandRegistrationInstance>;
 }
 
 
@@ -323,6 +329,12 @@ declare class BrandRegistrationInstance extends SerializableClass {
    * Provide a user-friendly representation
    */
   toJSON(): any;
+  /**
+   * update a BrandRegistrationInstance
+   *
+   * @param callback - Callback to handle processed record
+   */
+  update(callback?: (error: Error | null, items: BrandRegistrationInstance) => any): Promise<BrandRegistrationInstance>;
   url: string;
 }
 
